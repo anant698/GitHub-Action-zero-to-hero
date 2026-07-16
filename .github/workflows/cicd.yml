@@ -1,9 +1,8 @@
 name: CICD
-
 on: 
   workflow_dispatch: 
   jobs:
-  code: 
+   code: 
     runs-on: ubuntu-latest 
     steps:
       - name: checkout code
@@ -13,7 +12,6 @@ on:
     steps:
       - name: Build Docker container
         run: echo "Docker container build"
-
    test:
      runs-on: ubuntu-latest
      steps:
