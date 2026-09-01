@@ -1,0 +1,29 @@
+name: portfolio
+on:
+    push:
+        branches: [main]
+    workflow_dispatch:    
+permissions:
+    pages: write    # To deploy to pages
+    id-token: write
+            
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        environment:
+            name: github-pages
+            url: ${{ steps.deploy-to-pages.outputs.page_url }}
+        steps:
+            # get access to your portfolio code
+            - name: check out code
+              uses: actions/checkout@v3
+              # setup GitHub Pages
+            - name: setup GitHub Pages
+              uses: actions/configure-pages@v4
+              # static code artifacts are stored in the GitHub Actions workspace, so we need to upload them to GitHub Pages
+            - name: upload static files
+              uses: actions/upload-pages-artifact@v4
+              with:
+                path: "."
+            - name: deploy to GitHub Pages
+              uses: actions/deploy-pages@v4
